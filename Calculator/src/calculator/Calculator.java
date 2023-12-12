@@ -49,8 +49,18 @@ public class Calculator extends javax.swing.JFrame {
         lbl_show.setText(" ");
 
         btn_negate.setText("+/-");
+        btn_negate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_negateActionPerformed(evt);
+            }
+        });
 
         btn_clear.setText("C");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
 
         btn_divide.setText("/");
         btn_divide.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +70,11 @@ public class Calculator extends javax.swing.JFrame {
         });
 
         btn_back.setText("<-");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         btn_7.setText("7");
         btn_7.addActionListener(new java.awt.event.ActionListener() {
@@ -360,14 +375,16 @@ public class Calculator extends javax.swing.JFrame {
          if(edt_text.getText().length()>0)
          {
               num2=Double.parseDouble(edt_text.getText());
-         }
+        }
          else
          {
              num2=num1;
          }
          double result=0;
-         switch(operator)
+         if(operator!='\u0000')
          {
+              switch(operator)
+             {
              case '+':
                  result =num1+num2;
                  edt_text.setText(String.valueOf(result));
@@ -387,18 +404,43 @@ public class Calculator extends javax.swing.JFrame {
                  result =num1/num2;
                  edt_text.setText(String.valueOf(result));
                  lbl_show.setText(num1+" / "+num2+" =");
-                 break;
-            
-                     
-         }
-    }//GEN-LAST:event_btn_equlActionPerformed
+                 break;          
+              }
+              
+                 operator='\u0000';
 
+         }
+         else
+         {
+             edt_text.setText(Double.toString(num2));
+         }
+            
+        
+                  
+    }//GEN-LAST:event_btn_equlActionPerformed
+  
     private void btn_dotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dotActionPerformed
         if(!edt_text.getText().contains(".")){
             edt_text.setText(edt_text.getText()+".");
         }
-       
     }//GEN-LAST:event_btn_dotActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        if(edt_text.getText().length()>0)
+        {
+                    String numbers=edt_text.getText().substring(0,edt_text.getText().length()-1);
+                    edt_text.setText(numbers);
+        }
+         
+    }//GEN-LAST:event_btn_backActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+                    edt_text.setText("");
+    }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void btn_negateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_negateActionPerformed
+        ///////////////////////
+    }//GEN-LAST:event_btn_negateActionPerformed
 
   
     public static void main(String args[]) {
