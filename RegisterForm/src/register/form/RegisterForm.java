@@ -308,18 +308,28 @@ public class RegisterForm extends javax.swing.JFrame {
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
             if(!edt_emp_name.getText().equals("")&&!edt_emp_salary.getText().equals(""))
         {
-           String empName=edt_emp_name.getText();
-           double empSalary=Double.parseDouble(edt_emp_salary.getText());
-           String gender ;
-           if(rbtn_male.isSelected())
-           {
-               gender="Male";
-           }
-           else
-           {
-              gender="Female";
-           }
-           String deptNaame=cbx_dept_name.getSelectedItem().toString();
+                try {
+                    String empName=edt_emp_name.getText();
+                    double empSalary=Double.parseDouble(edt_emp_salary.getText());
+                    String gender ;
+                    if(rbtn_male.isSelected())
+                    {
+                        gender="Male";
+                    }
+                    else
+                    {
+                        gender="Female";
+                    }
+                    PreparedStatement stmt=con.prepareStatement("insert into employee (emp_name,salary,gander,dept_id) value(?,?,?,?)");
+                    stmt.setString(1,  empName);
+                    stmt.setDouble(2, empSalary);
+                    stmt.setString(3, gender);
+                    stmt.setInt(4,  deptids.get(cbx_dept_name.getSelectedIndex()));
+                    stmt.executeUpdate();
+                    fillTableModel();
+                } catch (SQLException ex) {
+                    Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
            
           
         }
