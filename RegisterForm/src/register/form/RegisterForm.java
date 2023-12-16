@@ -72,6 +72,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btn_add1 = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
+        del_update1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -175,6 +176,13 @@ public class RegisterForm extends javax.swing.JFrame {
             }
         });
 
+        del_update1.setText("Delet");
+        del_update1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                del_update1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -187,7 +195,9 @@ public class RegisterForm extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(btn_add1)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_update)))
+                        .addComponent(btn_update)
+                        .addGap(18, 18, 18)
+                        .addComponent(del_update1)))
                 .addGap(18, 18, 18))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
@@ -236,7 +246,8 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_add1)
-                    .addComponent(btn_update))
+                    .addComponent(btn_update)
+                    .addComponent(del_update1))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -412,6 +423,19 @@ public class RegisterForm extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btn_updateActionPerformed
 
+    private void del_update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_update1ActionPerformed
+            try {
+                // TODO add your handling code here:
+                PreparedStatement stmt=con.prepareStatement("  deletefrom employee WHERE emp_id=? )");
+                 stmt.setInt(1, empIds.get(Tbl_show.getSelectedRow()));
+                   stmt.executeUpdate();
+                               fillTableModel();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_del_update1ActionPerformed
+
     public static void main(String args[]) {
         
                     
@@ -430,6 +454,7 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_update;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbx_dept_name;
+    private javax.swing.JButton del_update1;
     private javax.swing.JTextField edt_emp_name;
     private javax.swing.JTextField edt_emp_salary;
     private javax.swing.JButton jButton1;
