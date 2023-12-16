@@ -52,6 +52,9 @@ public class RegisterForm extends javax.swing.JFrame {
         jDialog1 = new javax.swing.JDialog();
         jButton1 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -66,8 +69,9 @@ public class RegisterForm extends javax.swing.JFrame {
         cbx_dept_name = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_show = new javax.swing.JTable();
-        btn_add = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        btn_add1 = new javax.swing.JButton();
+        btn_update = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -81,6 +85,12 @@ public class RegisterForm extends javax.swing.JFrame {
         );
 
         jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
+        jButton4.setText("jButton4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Empoly Register Form");
@@ -140,18 +150,30 @@ public class RegisterForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(Tbl_show);
-
-        btn_add.setText(" Add");
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
+        Tbl_show.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tbl_showMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(Tbl_show);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("                       COMPANY");
         jLabel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 1, true));
+
+        btn_add1.setText(" Add");
+        btn_add1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add1ActionPerformed(evt);
+            }
+        });
+
+        btn_update.setText("update");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -159,9 +181,13 @@ public class RegisterForm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_add))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_add1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_update)))
                 .addGap(18, 18, 18))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
@@ -208,7 +234,9 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_add)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_add1)
+                    .addComponent(btn_update))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -305,9 +333,30 @@ public class RegisterForm extends javax.swing.JFrame {
          
     }//GEN-LAST:event_edt_emp_nameActionPerformed
 
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-            if(!edt_emp_name.getText().equals("")&&!edt_emp_salary.getText().equals(""))
+    private void Tbl_showMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_showMouseClicked
+        
+        
+        edt_emp_name.setText(Tbl_show.getValueAt(Tbl_show.getSelectedRow(), 0).toString());
+        edt_emp_salary.setText(Tbl_show.getValueAt(Tbl_show.getSelectedRow(), 1).toString());
+        if(Tbl_show.getValueAt(Tbl_show.getSelectedRow(), 2).toString()!=null)
         {
+            if(Tbl_show.getValueAt(Tbl_show.getSelectedRow(), 2).toString().equals( "Female"))
+            {
+                rbtn_female.setSelected(true);
+            }
+            else
+            {
+                rbtn_male.setSelected(true);
+            }
+            cbx_dept_name.setSelectedItem(Tbl_show.getValueAt(Tbl_show.getSelectedRow(), 3));
+        }
+
+            
+    }//GEN-LAST:event_Tbl_showMouseClicked
+
+    private void btn_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add1ActionPerformed
+                 if(!edt_emp_name.getText().equals("")&&!edt_emp_salary.getText().equals(""))
+                 {
                 try {
                     String empName=edt_emp_name.getText();
                     double empSalary=Double.parseDouble(edt_emp_salary.getText());
@@ -331,9 +380,37 @@ public class RegisterForm extends javax.swing.JFrame {
                     Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
            
-          
         }
-    }//GEN-LAST:event_btn_addActionPerformed
+    }//GEN-LAST:event_btn_add1ActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        if (!edt_emp_name.getText().equals("") && !edt_emp_salary.getText().equals("")) {
+        try {
+            String empName = edt_emp_name.getText();
+            double empSalary = Double.parseDouble(edt_emp_salary.getText());
+            String gender;
+            if (rbtn_male.isSelected()) {
+                gender = "Male";
+            } else {
+                gender = "Female";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(
+                "UPDATE employee SET emp_name=?, salary=?, gander=?, dept_id=? WHERE emp_id=?"
+            );
+            stmt.setString(1, empName);
+            stmt.setDouble(2, empSalary);
+            stmt.setString(3, gender);
+            stmt.setInt(4, deptids.get(cbx_dept_name.getSelectedIndex()));
+            stmt.setInt(5, empIds.get(Tbl_show.getSelectedRow()));
+            stmt.executeUpdate();
+                JOptionPane.showMessageDialog(this, "update successful");
+            fillTableModel();
+        } catch (SQLException | NumberFormatException ex) {
+            Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    }//GEN-LAST:event_btn_updateActionPerformed
 
     public static void main(String args[]) {
         
@@ -349,12 +426,16 @@ public class RegisterForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tbl_show;
-    private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_add1;
+    private javax.swing.JButton btn_update;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbx_dept_name;
     private javax.swing.JTextField edt_emp_name;
     private javax.swing.JTextField edt_emp_salary;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
