@@ -176,7 +176,7 @@ public class RegisterForm extends javax.swing.JFrame {
             }
         });
 
-        del_update1.setText("Delet");
+        del_update1.setText("Delete");
         del_update1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 del_update1ActionPerformed(evt);
